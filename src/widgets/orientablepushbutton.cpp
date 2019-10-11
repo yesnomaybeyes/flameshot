@@ -23,6 +23,15 @@
 #include <QDebug>
 #include <QStylePainter>
 
+namespace {
+// no QRect::transposed in old Qt
+QRect transposed(const QRect& rect) {
+    QSize size = rect.size();
+    size.transpose();
+    return QRect(rect.topLeft(), size);
+}
+}
+
 OrientablePushButton::OrientablePushButton(QWidget *parent)
     : QPushButton(parent)
 { }
@@ -59,14 +68,14 @@ void OrientablePushButton::paintEvent(QPaintEvent *event)
     {
         painter.rotate(90);
         painter.translate(0, -1 * width());
-        option.rect = option.rect.transposed();
+        option.rect = transposed(option.rect);
     }
 
     else if (m_orientation == OrientablePushButton::VerticalBottomToTop)
     {
         painter.rotate(-90);
         painter.translate(-1 * height(), 0);
-        option.rect = option.rect.transposed();
+        option.rect = transposed(option.rect);
     }
 
     painter.drawControl(QStyle::CE_PushButton, option);
