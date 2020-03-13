@@ -269,6 +269,9 @@ unix:!macx {
     desktopentry.path = $${PREFIX}/share/applications
     desktopentry.files = docs/desktopEntry/package/flameshot.desktop
 
+    man.path = $${PREFIX}/share/man/man1/
+    man.files = docs/man/flameshot.1
+
     servicedbus.path = $${PREFIX}/share/dbus-1/services/
 
     packaging {
@@ -284,7 +287,8 @@ unix:!macx {
         servicedbus \
         dbus \
         completion \
-        appdata
+        appdata \
+        man
 }
 
 # Imgur API data
