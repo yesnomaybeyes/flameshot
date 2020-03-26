@@ -117,6 +117,8 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
 #endif
         for (QScreen *const screen : QGuiApplication::screens()) {
             QRect r = screen->geometry();
+            r.moveTo(r.x() / screen->devicePixelRatio(),
+                r.y() / screen->devicePixelRatio());
 #ifdef Q_OS_WIN
             r.moveTo(r.topLeft() - topLeft);
 #endif
@@ -586,6 +588,9 @@ void CaptureWidget::initPanel() {
     QRect panelRect = rect();
     if (m_context.fullscreen) {
         panelRect = QGuiApplication::primaryScreen()->geometry();
+        panelRect.moveTo(
+            panelRect.x() / QGuiApplication::primaryScreen()->devicePixelRatio(),
+            panelRect.y() / QGuiApplication::primaryScreen()->devicePixelRatio());
     }
     panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
     panelRect.setWidth(m_colorPicker->width() * 3);
