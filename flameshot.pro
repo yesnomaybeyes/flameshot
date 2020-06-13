@@ -70,7 +70,7 @@ for(tsfile, TRANSLATIONS) {
 DEFINES += QT_DEPRECATED_WARNINGS
 
 include(src/third-party/singleapplication/singleapplication.pri)
-include(src/third-party/Qt-Color-Widgets//color_widgets.pri)
+include(src/third-party/Qt-Color-Widgets/color_widgets.pri)
 
 DEFINES += QAPPLICATION_CLASS=QApplication
 
@@ -96,6 +96,7 @@ SOURCES += src/main.cpp \
     src/tools/copy/copytool.cpp \
     src/tools/exit/exittool.cpp \
     src/tools/imgur/imguruploadertool.cpp \
+    src/tools/customuploader/customuploadertool.cpp \
     src/tools/line/linetool.cpp \
     src/tools/marker/markertool.cpp \
     src/tools/move/movetool.cpp \
@@ -113,6 +114,7 @@ SOURCES += src/main.cpp \
     src/cli/commandargument.cpp \
     src/utils/screenshotsaver.cpp \
     src/tools/imgur/imguruploader.cpp \
+    src/tools/customuploader/customuploader.cpp \
     src/widgets/loadspinner.cpp \
     src/widgets/imagelabel.cpp \
     src/widgets/notificationwidget.cpp \
@@ -170,6 +172,7 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/tools/copy/copytool.h \
     src/tools/exit/exittool.h \
     src/tools/imgur/imguruploadertool.h \
+    src/tools/customuploader/customuploadertool.h \
     src/tools/line/linetool.h \
     src/tools/marker/markertool.h \
     src/tools/move/movetool.h \
@@ -186,6 +189,7 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/cli/commandargument.h \
     src/utils/screenshotsaver.h \
     src/tools/imgur/imguruploader.h \
+    src/tools/customuploader/customuploader.h \
     src/widgets/loadspinner.h \
     src/widgets/imagelabel.h \
     src/widgets/notificationwidget.h \
