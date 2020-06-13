@@ -46,6 +46,7 @@
   - [Local](#local)
   - [Global](#global)
     - [On KDE Plasma desktop](#on-kde-plasma-desktop)
+- [Custom Uploader](#custom-uploader)
 - [Considerations](#considerations)
 - [Installation](#installation)
 - [Compilation](#compilation)
@@ -203,6 +204,16 @@ Steps for using the configuration:
 5. Click _Edit_ → _Import..._, navigate to the Desktop folder (or wherever you saved the configuration file) and open the configuration file.
 6. Now the Flameshot entry should appear in the list. Click _Apply_ to apply the changes.
 7. If you want to change the defaults, you can expand the entry, select the appropriate action and modify it as you wish; the process is pretty mush self-explanatory.
+
+## Custom Uploader
+
+You can set custom uploader script in config to use with Image Uploader tool.
+Image data will be sent with STDIN, on first line you need to output image url, on second delete url.
+
+Example script for i.nuuls.com:
+```
+curl -X POST -F "file=@/dev/stdin;type=image/png" "https://i.nuuls.com/upload?password=ayylmao"
+```
 
 ## Considerations
 
