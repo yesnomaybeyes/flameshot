@@ -18,6 +18,8 @@
 #pragma once
 
 #include <QWidget>
+#include <QLineEdit>
+#include <QLabel>
 
 class QVBoxLayout;
 class QCheckBox;
@@ -28,15 +30,13 @@ class GeneneralConf : public QWidget {
 public:
     explicit GeneneralConf(QWidget *parent = nullptr);
 
-public slots:
-    void updateComponents();
-
 private slots:
    void showHelpChanged(bool checked);
    void showDesktopNotificationChanged(bool checked);
    void showTrayIconChanged(bool checked);
    void autostartChanged(bool checked);
    void closeAfterCaptureChanged(bool checked);
+   void customUploaderCommandChanged(QString command);
    void importConfiguration();
    void exportFileConfiguration();
    void resetConfiguration();
@@ -49,9 +49,11 @@ private:
     QCheckBox *m_autostart;
     QCheckBox *m_closeAfterCapture;
     QCheckBox *m_copyAndCloseAfterUpload;
+    QLineEdit *m_customUploaderCommand;
     QPushButton *m_importButton;
     QPushButton *m_exportButton;
     QPushButton *m_resetButton;
+    QLabel *m_customUploaderLabel;
 
     void initShowHelp();
     void initShowDesktopNotification();
@@ -60,4 +62,5 @@ private:
     void initAutostart();
     void initCloseAfterCapture();
     void initCopyAndCloseAfterUpload();
+    void initCustomUploaderCommand();
 };

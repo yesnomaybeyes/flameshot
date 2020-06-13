@@ -28,6 +28,8 @@
 #include <QFile>
 #include <QTextCodec>
 #include <QGroupBox>
+#include <QLineEdit>
+#include <QLabel>
 
 GeneneralConf::GeneneralConf(QWidget *parent) : QWidget(parent) {
     m_layout = new QVBoxLayout(this);
@@ -38,23 +40,10 @@ GeneneralConf::GeneneralConf(QWidget *parent) : QWidget(parent) {
     initAutostart();
     initCloseAfterCapture();
     initCopyAndCloseAfterUpload();
+    initCustomUploaderCommand();
 
     // this has to be at the end
     initConfingButtons();
-    updateComponents();
-}
-
-void GeneneralConf::updateComponents() {
-    ConfigHandler config;
-    m_helpMessage->setChecked(config.showHelpValue());
-    m_sysNotifications->setChecked(config.desktopNotificationValue());
-    m_autostart->setChecked(config.startupLaunchValue());
-    m_closeAfterCapture->setChecked(config.closeAfterScreenshotValue());
-    m_copyAndCloseAfterUpload->setChecked(config.copyAndCloseAfterUploadEnabled());
-
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    m_showTray->setChecked(!config.disabledTrayIconValue());
-#endif
 }
 
 void GeneneralConf::showHelpChanged(bool checked) {
@@ -82,7 +71,12 @@ void GeneneralConf::closeAfterCaptureChanged(bool checked) {
     ConfigHandler().setCloseAfterScreenshot(checked);
 }
 
-void GeneneralConf::importConfiguration() {
+void GeneneralConf::customUploaderCommandChanged(QString command) {
+    ConfigHandler().setCustomUploaderCommand(command);
+}
+
+void GeneneralConf::importConfiguration()
+{
     QString fileName = QFileDialog::getOpenFileName(this, tr("Import"));
     if (fileName.isEmpty()) {
         return;
@@ -223,6 +217,18 @@ void GeneneralConf::initCloseAfterCapture() {
 
     connect(m_closeAfterCapture, &QCheckBox::clicked, this,
             &GeneneralConf::closeAfterCaptureChanged);
+}
+
+void GeneneralConf::initCustomUploaderCommand() {
+    m_customUploaderLabel = new QLabel(tr("Custom uploader command:"), this);
+    m_layout->addWidget(m_customUploaderLabel);
+    m_customUploaderCommand = new QLineEdit(this);
+    m_customUploaderCommand->setToolTip(tr("Custom uploader command."));
+    ConfigHandler config;
+    m_customUploaderCommand->setText(config.customUploaderCommandValue());
+    m_layout->addWidget(m_customUploaderCommand);
+
+    connect(m_customUploaderCommand, &QLineEdit::textChanged, this, &GeneneralConf::customUploaderCommandChanged);
 }
 
 void GeneneralConf::initCopyAndCloseAfterUpload()
