@@ -3,7 +3,7 @@
  *
  * \author Mattia Basaglia
  *
- * \copyright Copyright (C) 2013-2017 Mattia Basaglia
+ * \copyright Copyright (C) 2013-2020 Mattia Basaglia
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -19,8 +19,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+#ifndef COLOR_UTILS_HPP
+#define COLOR_UTILS_HPP
+
 #include <QColor>
 #include <qmath.h>
+
+#include "QtColorWidgets/colorwidgets_global.hpp"
 
 namespace color_widgets {
 namespace detail {
@@ -64,7 +69,9 @@ inline qreal color_HSL_saturationF(const QColor& col)
     return c / (1-qAbs(2*l-1));
 }
 
-QColor color_from_hsl(qreal hue, qreal sat, qreal lig, qreal alpha = 1 );
+QCP_EXPORT QColor color_from_hsl(qreal hue, qreal sat, qreal lig, qreal alpha = 1 );
 
 } // namespace detail
 } // namespace color_widgets
+
+#endif // COLOR_UTILS_HPP

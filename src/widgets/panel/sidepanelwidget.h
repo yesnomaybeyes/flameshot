@@ -18,7 +18,7 @@
 #pragma once
 
 #include <QWidget>
-#include "color_wheel.hpp"
+#include "src/third-party/Qt-Color-Widgets/include/QtColorWidgets/color_wheel.hpp"
 
 class QVBoxLayout;
 class QPushButton;

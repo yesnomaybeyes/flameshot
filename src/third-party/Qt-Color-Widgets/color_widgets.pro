@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2013-2017 Mattia Basaglia
+# Copyright (C) 2013-2020 Mattia Basaglia
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -19,9 +19,9 @@ CONFIG += dll
 QT += core gui widgets
 DEFINES += QTCOLORWIDGETS_LIBRARY
 
-TARGET=ColorWidgets-qt5
+TARGET=QtColorWidgets-Qt5
 
-VERSION=1.0.0
+VERSION=2.2.0
 
 OBJECTS_DIR = out/obj
 MOC_DIR = out/generated

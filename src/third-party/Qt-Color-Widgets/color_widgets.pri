@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2017 Mattia Basaglia
+# Copyright (C) 2013-2019 Mattia Basaglia
 #
 #
 # This software is free software: you can redistribute it and/or modify
@@ -19,13 +19,15 @@ CONFIG += c++11
 INCLUDEPATH += $$PWD/src $$PWD/include
 
 SOURCES += \
-    $$PWD/src/color_wheel.cpp \
-    $$PWD/src/color_utils.cpp
+    $$PWD/src/QtColorWidgets/color_utils.cpp \
+    $$PWD/src/QtColorWidgets/color_wheel.cpp
 
 HEADERS += \
-    $$PWD/include/color_wheel.hpp \
-    $$PWD/src/color_utils.hpp
+    $$PWD/include/QtColorWidgets/color_utils.hpp \
+    $$PWD/include/QtColorWidgets/color_wheel.hpp \
+    $$PWD/include/QtColorWidgets/color_wheel_private.hpp \
+    $$PWD/include/QtColorWidgets/colorwidgets_global.hpp
 
 RESOURCES += \
-    $$PWD/src/color_widgets.qrc
+    $$PWD/resources/QtColorWidgets/color_widgets.qrc
 

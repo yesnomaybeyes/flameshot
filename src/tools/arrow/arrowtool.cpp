@@ -16,6 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "arrowtool.h"
+#include <QPainterPath>
 
 namespace {
 

@@ -1,0 +1,17 @@
+set (HEADERS
+color_wheel.hpp
+colorwidgets_global.hpp
+)
+
+file(RELATIVE_PATH
+  PREFIX
+  ${PROJECT_SOURCE_DIR}
+  ${CMAKE_CURRENT_LIST_DIR})
+
+
+foreach (HEADER IN LISTS HEADERS)
+  target_sources (${TARGET_NAME}
+    PRIVATE
+    $<INSTALL_INTERFACE:${PREFIX}/${HEADER}>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/${HEADER}>)
+endforeach (HEADER IN HEADERS)
