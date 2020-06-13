@@ -46,11 +46,12 @@ public:
         TYPE_SAVE = 11,
         TYPE_EXIT = 12,
         TYPE_IMAGEUPLOADER = 13,
-        TYPE_OPEN_APP = 14,
-        TYPE_BLUR = 15,
-        TYPE_REDO = 16,
-        TYPE_PIN = 17,
-        TYPE_TEXT = 18,
+        TYPE_IMGURUPLOADER = 14,
+        TYPE_OPEN_APP = 15,
+        TYPE_BLUR = 16,
+        TYPE_REDO = 17,
+        TYPE_PIN = 18,
+        TYPE_TEXT = 19,
     };
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
