@@ -17,7 +17,7 @@
 
 #pragma once
 
-#include "color_wheel.hpp"
+#include "src/third-party/Qt-Color-Widgets/include/QtColorWidgets/color_wheel.hpp"
 #include "src/widgets/capture/capturebutton.h"
 #include <QGroupBox>
 

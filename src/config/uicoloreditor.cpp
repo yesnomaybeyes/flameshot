@@ -81,7 +81,7 @@ void UIcolorEditor::updateLocalColor(const QColor c) {
 
 void UIcolorEditor::initColorWheel() {
     m_colorWheel = new color_widgets::ColorWheel(this);
-    connect(m_colorWheel, &color_widgets::ColorWheel::mouseReleaseOnColor, this,
+    connect(m_colorWheel, &color_widgets::ColorWheel::colorSelected, this,
             &UIcolorEditor::updateUIcolor);
     connect(m_colorWheel, &color_widgets::ColorWheel::colorChanged, this,
             &UIcolorEditor::updateLocalColor);

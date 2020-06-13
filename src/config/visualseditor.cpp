@@ -30,13 +30,6 @@ VisualsEditor::VisualsEditor(QWidget *parent) : QWidget(parent) {
     initWidgets();
 }
 
-void VisualsEditor::updateComponents() {
-    m_buttonList->updateComponents();
-    m_colorEditor->updateComponents();
-    int opacity = ConfigHandler().contrastOpacityValue();
-    m_opacitySlider->setMapedValue(0, opacity, 255);
-}
-
 void VisualsEditor::initOpacitySlider() {
     m_opacitySlider = new ExtendedSlider();
     m_opacitySlider->setFocusPolicy(Qt::NoFocus);

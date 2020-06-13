@@ -71,14 +71,6 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     m_generalConfig = new GeneneralConf();
     addTab(m_generalConfig, QIcon(modifier + "config.svg"),
            tr("General"));
-
-    // connect update sigslots
-    connect(this, &ConfigWindow::updateChildren,
-            m_filenameEditor, &FileNameEditor::updateComponents);
-    connect(this, &ConfigWindow::updateChildren,
-            m_visuals, &VisualsEditor::updateComponents);
-    connect(this, &ConfigWindow::updateChildren,
-            m_generalConfig, &GeneneralConf::updateComponents);
 }
 
 void ConfigWindow::keyPressEvent(QKeyEvent *e) {

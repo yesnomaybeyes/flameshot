@@ -28,10 +28,7 @@ class VisualsEditor : public QWidget {
     Q_OBJECT
 public:
     explicit VisualsEditor(QWidget *parent = nullptr);
-
-public slots:
-    void updateComponents();
-
+    
 private slots:
     void saveOpacity();
 

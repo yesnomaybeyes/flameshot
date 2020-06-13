@@ -67,7 +67,6 @@ void FileNameEditor::initWidgets() {
 
     connect(m_nameEditor, &QLineEdit::textChanged, this,
             &FileNameEditor::showParsedPattern);
-    updateComponents();
 
     // helper buttons
     m_helperButtons = new StrftimeChooserWidget(this);
@@ -107,9 +106,4 @@ void FileNameEditor::resetName() {
 void FileNameEditor::addToNameEditor(QString s) {
     m_nameEditor->setText(m_nameEditor->text() + s);
     m_nameEditor->setFocus();
-}
-
-void FileNameEditor::updateComponents() {
-    m_nameEditor->setText(ConfigHandler().filenamePatternValue());
-    m_outputLabel->setText(m_nameHandler->parsedPattern());
 }
