@@ -54,6 +54,7 @@ QVector<CaptureButton::ButtonType> ConfigHandler::getButtons() {
                 << CaptureButton::TYPE_SAVE
                 << CaptureButton::TYPE_EXIT
                 << CaptureButton::TYPE_IMAGEUPLOADER
+                << CaptureButton::TYPE_IMGURUPLOADER
                 << CaptureButton::TYPE_OPEN_APP
                 << CaptureButton::TYPE_PIN
                 << CaptureButton::TYPE_TEXT;
@@ -123,7 +124,16 @@ void ConfigHandler::setSavePath(const QString &savePath) {
     m_settings.setValue(QStringLiteral("savePath"), savePath);
 }
 
-QColor ConfigHandler::uiMainColorValue() {
+QString ConfigHandler::customUploaderCommandValue() {
+    return m_settings.value("customUploaderCommand", "/bin/cat").toString();
+}
+
+void ConfigHandler::setCustomUploaderCommand(QString command){
+    m_settings.setValue("customUploaderCommand", command);
+}
+
+QColor ConfigHandler::uiMainColorValue()
+{
     QColor res = QColor(116, 0, 150);
 
     if (m_settings.contains(QStringLiteral("uiColor"))) {

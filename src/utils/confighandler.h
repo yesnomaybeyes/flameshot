@@ -74,6 +74,8 @@ public:
     bool copyAndCloseAfterUploadEnabled();
     void setCopyAndCloseAfterUploadEnabled(const bool);
 
+    QString customUploaderCommandValue();
+    void setCustomUploaderCommand(QString command);
 
     void setDefaults();
     void setAllTheButtons();
