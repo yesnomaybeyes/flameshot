@@ -109,7 +109,7 @@ void CustomUploader::upload() {
         }
         onUploadOk();
     } else {
-        m_infoLabel->setText(result);
+        close();
     }
 }
 
