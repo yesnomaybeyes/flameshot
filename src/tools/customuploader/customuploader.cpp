@@ -35,14 +35,10 @@
 #include <QMimeData>
 #include <QBuffer>
 #include <QUrlQuery>
-#include <QNetworkRequest>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
 #include <QTimer>
 #include <QThread>
-#include <QJsonDocument>
-#include <QJsonObject>
 #include <QProcess>
+#include <QRegExp>
 
 CustomUploader::CustomUploader(const QPixmap &capture, QWidget *parent) :
     QWidget(parent), m_pixmap(capture)
@@ -100,20 +96,18 @@ void CustomUploader::upload() {
     QByteArray resultByteArr = process.readAll();
     QString result = QString::fromStdString(resultByteArr.toStdString());
     if (process.exitCode() == 0) {
-        QStringList lines = result.split("[\n\r]");
+        QStringList lines = result.split(QRegExp("[\\n\\r]"));
         if (lines.count() > 0 && !lines[0].isEmpty()) {
             m_imageURL.setUrl(lines[0]);
             if (ConfigHandler().copyAndCloseAfterUploadEnabled()) {
-                QApplication::clipboard()->setText(lines[0]);
+                QApplication::clipboard()->setText(m_imageURL.toString());
                 close();
             }
         }
         if (lines.count() > 1 && !lines[1].isEmpty()) {
             m_deleteImageURL.setUrl(lines[1]);
         }
-        else {
-            onUploadOk();
-        }
+        onUploadOk();
     } else {
         m_infoLabel->setText(result);
     }
