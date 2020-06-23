@@ -72,6 +72,7 @@
 - In-app screenshot edition.
 - DBus interface.
 - Upload to Imgur.
+- Upload to any service with custom script.
 
 ## Usage
 
