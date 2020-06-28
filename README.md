@@ -230,26 +230,7 @@ curl -X POST -F "file=@/dev/stdin;type=image/png" "https://i.nuuls.com/upload?pa
 
 ## Installation
 
-There are packages available for a few distros:
-
-- [Arch](https://www.archlinux.org/packages/community/x86_64/flameshot/): `pacman -S flameshot`
-  + Snapshot also available via AUR: [flameshot-git](https://aur.archlinux.org/packages/flameshot-git).
-- [Debian 10+](https://tracker.debian.org/pkg/flameshot): `apt install flameshot`
-  + Package for Debian 9 ("Stretch") also [available via stretch-backports](https://backports.debian.org/).
-- [Ubuntu 18.04+](https://launchpad.net/ubuntu/+source/flameshot): `apt install flameshot`
-- [openSUSE](https://software.opensuse.org/package/flameshot)
-- [Void Linux](https://github.com/void-linux/void-packages/tree/master/srcpkgs/flameshot) (`xbps-install flameshot`)
-- [Docker](https://github.com/ManuelLR/docker-flameshot)
-- Fedora: `dnf install flameshot`
-- [Snap/Flatpak/AppImage](https://github.com/flameshotapp/packages)
-- Besides, generic packages available via [opensuse software repository](https://software.opensuse.org//download.html?project=home%3AVitzy&package=flameshot)
-
-<details>
-  <summary>Expand this section to see what distros are using an up to date version of flameshot</summary>
-  <a href="https://repology.org/metapackage/flameshot/versions">
-    <img src="https://repology.org/badge/vertical-allrepos/flameshot.svg" alt="Packaging status">
-  </a>
-</details>
+- [Arch AUR](https://aur.archlinux.org/packages/flameshot-33kk-git/): `yay -S flameshot`
 
 ## Compilation
 
