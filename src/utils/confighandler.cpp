@@ -153,8 +153,8 @@ void ConfigHandler::setUIMainColor(const QColor &c) {
 QColor ConfigHandler::uiContrastColorValue() {
     QColor res = QColor(86, 0, 120);
 
-    if (m_settings.contains(QStringLiteral("contastUiColor"))) {
-        QString hex = m_settings.value(QStringLiteral("contastUiColor")).toString();
+    if (m_settings.contains(QStringLiteral("contrastUiColor"))) {
+        QString hex = m_settings.value(QStringLiteral("contrastUiColor")).toString();
 
         if (QColor::isValidColor(hex)) {
             res = QColor(hex);
@@ -165,7 +165,7 @@ QColor ConfigHandler::uiContrastColorValue() {
 }
 
 void ConfigHandler::setUIContrastColor(const QColor &c) {
-    m_settings.setValue(QStringLiteral("contastUiColor"), c.name());
+    m_settings.setValue(QStringLiteral("contrastUiColor"), c.name());
 }
 
 QColor ConfigHandler::drawColorValue() {
@@ -196,6 +196,14 @@ bool ConfigHandler::showHelpValue() {
 
 void ConfigHandler::setShowHelp(const bool showHelp) {
     m_settings.setValue(QStringLiteral("showHelp"), showHelp);
+}
+
+bool ConfigHandler::showSidePanelButtonValue() {
+    return m_settings.value(QStringLiteral("showSidePanelButton"), true).toBool();
+}
+
+void ConfigHandler::setShowSidePanelButton(const bool showSidePanelButton) {
+    m_settings.setValue(QStringLiteral("showSidePanelButton"), showSidePanelButton);
 }
 
 bool ConfigHandler::desktopNotificationValue() {

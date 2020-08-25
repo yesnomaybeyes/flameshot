@@ -119,6 +119,7 @@ SOURCES += src/main.cpp \
     src/widgets/imagelabel.cpp \
     src/widgets/notificationwidget.cpp \
     src/widgets/capture/notifierbox.cpp \
+    src/widgets/orientablepushbutton.cpp \
     src/utils/desktopinfo.cpp \
     src/tools/launcher/applauncherwidget.cpp \
     src/utils/desktopfileparse.cpp \
@@ -194,6 +195,7 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/widgets/imagelabel.h \
     src/widgets/notificationwidget.h \
     src/widgets/capture/notifierbox.h \
+    src/widgets/orientablepushbutton.h \
     src/utils/desktopinfo.h \
     src/tools/launcher/applauncherwidget.h \
     src/utils/desktopfileparse.h \
@@ -273,6 +275,9 @@ unix:!macx {
     desktopentry.path = $${PREFIX}/share/applications
     desktopentry.files = docs/desktopEntry/package/flameshot.desktop
 
+    man.path = $${PREFIX}/share/man/man1/
+    man.files = docs/man/flameshot.1
+
     servicedbus.path = $${PREFIX}/share/dbus-1/services/
 
     packaging {
@@ -288,7 +293,8 @@ unix:!macx {
         servicedbus \
         dbus \
         completion \
-        appdata
+        appdata \
+        man
 }
 
 # Imgur API data

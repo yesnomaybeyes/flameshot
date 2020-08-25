@@ -33,6 +33,7 @@
 #include "src/utils/screenshotsaver.h"
 #include "src/core/controller.h"
 #include "src/widgets/capture/modificationcommand.h"
+#include "src/widgets/orientablepushbutton.h"
 #include <QUndoView>
 #include <QScreen>
 #include <QGuiApplication>
@@ -102,20 +103,54 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
                        | Qt::FramelessWindowHint
                        | Qt::Tool);
 #endif
-        resize(pixmap().size());
+        auto ratio = pixmap().devicePixelRatio();
+        auto oldSize = pixmap().size();
+        auto newSize = oldSize / ratio;
+        resize(newSize);
     }
     // Create buttons
     m_buttonHandler = new ButtonHandler(this);
     updateButtons();
     QVector<QRect> areas;
     if (m_context.fullscreen) {
+#ifdef Q_OS_LINUX
+        int xFixup = 0;
+#endif
         for (QScreen *const screen : QGuiApplication::screens()) {
             QRect r = screen->geometry();
+            r.moveTo(r.x() / screen->devicePixelRatio(),
+                r.y() / screen->devicePixelRatio());
 #ifdef Q_OS_WIN
             r.moveTo(r.topLeft() - topLeft);
 #endif
+#ifdef Q_OS_LINUX
+            // On Linux (confirmed on Xorg & kubuntu, not tested on wayland)
+            // Top left point is in device pixels, not scaled,
+            // but height+width is scaled to device independednt pixels
+            // this code performs fixup for top left point to device independent pixels!
+
+            // this fixup helps for button location layout around selected area on multymonitor setups
+
+            auto topLeft = r.topLeft();
+            auto fixedTopLeft = topLeft / screen->devicePixelRatio();
+
+            if (topLeft.x() !=0 && topLeft != fixedTopLeft) {
+                // We need to fix x ccordinate and shift window left.
+                // Some wierd idiocity for multydisplay setups on Linux.
+                // not needed fot y, only for horizontal placement of monitors.
+                // https://github.com/lupoDharkael/flameshot/issues/227#issuecomment-570147808
+                xFixup += topLeft.x() - fixedTopLeft.x();
+            }
+            r.moveTo(fixedTopLeft);
+#endif
             areas.append(r);
         }
+#ifdef Q_OS_LINUX
+        if (xFixup) {
+             move(xFixup, 0);
+        }
+#endif
+
     } else {
         areas.append(rect());
     }
@@ -549,12 +584,36 @@ void CaptureWidget::initContext(const QString &savePath, bool fullscreen) {
 }
 
 void CaptureWidget::initPanel() {
-    m_panel = new UtilityPanel(this);
-    makeChild(m_panel);
     QRect panelRect = rect();
     if (m_context.fullscreen) {
         panelRect = QGuiApplication::primaryScreen()->geometry();
+        panelRect.moveTo(
+            panelRect.x() / QGuiApplication::primaryScreen()->devicePixelRatio(),
+            panelRect.y() / QGuiApplication::primaryScreen()->devicePixelRatio());
     }
+
+    ConfigHandler config;
+
+    if (config.showSidePanelButtonValue()) {
+        auto *panelToggleButton = new OrientablePushButton(tr("Tool Settings"), this);
+        makeChild(panelToggleButton);
+        panelToggleButton->setOrientation(OrientablePushButton::VerticalBottomToTop);
+        panelToggleButton->move(panelRect.x(), panelRect.y() + panelRect.height() / 2 - panelToggleButton->width() / 2);
+        panelToggleButton->setCursor(Qt::ArrowCursor);
+        connect(panelToggleButton, &QPushButton::clicked, this, &CaptureWidget::togglePanel);
+
+        QColor mainColor = config.uiMainColorValue();
+        QColor textColor = ColorUtils::colorIsDark(mainColor) ? Qt::white : Qt::black;
+        QPalette palette = panelToggleButton->palette();
+        palette.setColor(QPalette::Button, mainColor);
+        palette.setColor(QPalette::ButtonText, textColor);
+        panelToggleButton->setAutoFillBackground(true);
+        panelToggleButton->setPalette(palette);
+        panelToggleButton->update();
+    }
+
+    m_panel = new UtilityPanel(this);
+    makeChild(m_panel);
     panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
     panelRect.setWidth(m_colorPicker->width() * 3);
     m_panel->setGeometry(panelRect);
